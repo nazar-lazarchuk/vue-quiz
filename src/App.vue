@@ -3,6 +3,7 @@
     <h1 class="my-3 text-center">Vue.js online quiz</h1>
     <transition name="rotate" mode="out-in">
       <Card
+        class="shadow rounded"
         v-if="!areAllAnswersReceived"
         :question="questions[currentQuestion]"
         @answer="onAnswer"
@@ -18,6 +19,7 @@
           class="col-lg-4 col-md-6 col-sm-12"
         >
           <AnswerCard
+            class="shadow rounded"
             :question="question"
             :answerId="answers[i]"
             :correctAnswerId="correctAnswers[i]"
@@ -68,15 +70,18 @@ export default {
 </script>
 
 <style scoped>
-.rotate-enter-active,
+.rotate-enter-active {
+  transition: all 0.4s linear;
+}
 .rotate-leave-active {
-  transition: transform 0.3s linear;
+  transition: all 0.4s linear;
 }
 .rotate-enter-from {
-  transform: rotateY(-90deg);
+  transform: translateX(100%);
 }
 .rotate-leave-to {
-  transform: rotateY(90deg);
+  transform: scale(0.6);
+  opacity: 0;
 }
 
 .animation-wrapper {
