@@ -11,14 +11,18 @@
       />
     </transition>
     <transition name="fade">
-      <div v-if="areAnswersVisible" class="mb-5">
-        <AnswerCard
+      <div v-if="areAnswersVisible" class="mb-5 row">
+        <div
           v-for="(question, i) in questions"
           :key="i"
-          :question="question"
-          :answerId="answers[i]"
-          :correctAnswerId="correctAnswers[i]"
-        />
+          class="col-lg-4 col-md-6 col-sm-12"
+        >
+          <AnswerCard
+            :question="question"
+            :answerId="answers[i]"
+            :correctAnswerId="correctAnswers[i]"
+          />
+        </div>
       </div>
     </transition>
   </div>

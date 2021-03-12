@@ -2,7 +2,7 @@
   <div class="card mt-5">
     <div class="card-body d-flex flex-column justify-content-between">
       <div>
-        <h6 class="card-subtitle mb-2 text-muted">Питання №{{ index }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Питання №{{ index + 1 }}</h6>
         <h5 class="card-title">
           {{ question.title }}
         </h5>
