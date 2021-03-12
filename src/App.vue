@@ -21,6 +21,7 @@
             :question="question"
             :answerId="answers[i]"
             :correctAnswerId="correctAnswers[i]"
+            :index="i"
           />
         </div>
       </div>
