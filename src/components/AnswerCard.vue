@@ -1,12 +1,8 @@
 <template>
   <div class="card mt-5">
-    <form
-      class="card-body d-flex flex-column justify-content-between"
-      style="height: 300px"
-      @submit.prevent="onSubmit"
-    >
+    <div class="card-body d-flex flex-column justify-content-between">
       <div>
-        <h6 class="card-subtitle mb-2 text-muted">Питання №{{index}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Питання №{{ index }}</h6>
         <h5 class="card-title">
           {{ question.title }}
         </h5>
@@ -15,6 +11,10 @@
         v-for="item in question.items"
         :key="item.id"
         class="form-check"
+        :class="{
+          'check-correct': correctAnswerId === item.id,
+          'check-incorrect': answerId === item.id,
+        }"
       >
         <label class="form-check-label">
           <input
@@ -22,21 +22,19 @@
             type="radio"
             name="flexRadioDefault"
             :value="item.id"
-            v-model="value"
+            disabled
+            :checked="answerId === item.id"
           />
           {{ item.title }}
         </label>
       </div>
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-primary" type="submit">Відправити</button>
-      </div>
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Card",
+  name: "AnswerCard",
   props: {
     question: {
       required: true,
@@ -46,20 +44,23 @@ export default {
       required: true,
       type: Number,
     },
-  },
-  data() {
-    return {
-      value: null,
-    };
-  },
-  methods: {
-    onSubmit() {
-      if (!this.value) {
-        alert('Вкажіть відповідь!');
-        return;
-      }
-      this.$emit("answer", this.value);
+    correctAnswerId: {
+      required: false,
+      type: String,
+    },
+    answerId: {
+      required: false,
+      type: String,
     },
   },
 };
 </script>
+
+<style scoped>
+.check-incorrect label {
+  color: red;
+}
+.check-correct label {
+  color: limegreen;
+}
+</style>

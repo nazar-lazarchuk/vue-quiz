@@ -7,11 +7,12 @@
         :question="questions[currentQuestion]"
         @answer="onAnswer"
         :key="currentQuestion"
+        :index="currentQuestion"
       />
     </transition>
     <transition name="fade">
       <div v-if="areAnswersVisible" class="mb-5">
-        <Card
+        <AnswerCard
           v-for="(question, i) in questions"
           :key="i"
           :question="question"
@@ -28,10 +29,11 @@ import questions from "./questions.json";
 import correctAnswers from "./correctAnswers.json";
 
 import Card from "./components/Card";
+import AnswerCard from "./components/AnswerCard";
 
 export default {
   name: "App",
-  components: { Card },
+  components: { Card, AnswerCard },
   data() {
     return {
       questions,
