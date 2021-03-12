@@ -20,7 +20,7 @@
           <input
             class="form-check-input"
             type="radio"
-            name="flexRadioDefault"
+            :name="`radio-${index}`"
             :value="item.id"
             disabled
             :checked="answerId === item.id"

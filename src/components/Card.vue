@@ -16,7 +16,7 @@
           <input
             class="form-check-input"
             type="radio"
-            name="flexRadioDefault"
+            :name="`radio-${index}`"
             :value="item.id"
             v-model="value"
           />

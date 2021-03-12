@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import questions from "./questions.json";
-import correctAnswers from "./correctAnswers.json";
+import useAnswers from "./compositions/useAnswers";
+import useQuestions from "./compositions/useQuestions";
 
 import Card from "./components/Card";
 import AnswerCard from "./components/AnswerCard";
@@ -39,41 +39,31 @@ import AnswerCard from "./components/AnswerCard";
 export default {
   name: "App",
   components: { Card, AnswerCard },
-  data() {
-    return {
+
+  setup() {
+    const { answers, areAnswersVisible, correctAnswers } = useAnswers();
+
+    const {
       questions,
-      currentQuestion: 0,
-      answers: [],
+      currentQuestion,
+      areAllAnswersReceived,
+      nextQuestion,
+      onAnswer,
+    } = useQuestions(areAnswersVisible, answers);
+
+    return {
+      answers,
+      areAnswersVisible,
       correctAnswers,
-      areAnswersVisible: false,
+      questions,
+      currentQuestion,
+      areAllAnswersReceived,
+      nextQuestion,
+      onAnswer,
     };
   },
-  methods: {
-    onAnswer(answer) {
-      if (this.currentQuestion < this.questions.length) {
-        this.answers.push(answer);
-        this.next();
-      }
-    },
-    next() {
-      if (!this.areAllAnswersReceived) {
-        this.currentQuestion++;
 
-        if (this.areAllAnswersReceived) {
-          setTimeout(() => this.showAnswers(), 500);
-        }
-      }
-    },
-    showAnswers() {
-      if (this.areAllAnswersReceived) this.areAnswersVisible = true;
-    },
-  },
-
-  computed: {
-    areAllAnswersReceived() {
-      return this.currentQuestion === this.questions.length;
-    },
-  },
+  methods: {},
 };
 </script>
 
