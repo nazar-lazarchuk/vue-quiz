@@ -78,15 +78,18 @@ export default {
 </script>
 
 <style scoped>
-.rotate-enter-active,
+.rotate-enter-active {
+  transition: all .4s linear;
+}
 .rotate-leave-active {
-  transition: transform 0.3s linear;
+  transition: all .4s linear;
 }
 .rotate-enter-from {
-  transform: rotateY(-90deg);
+  transform: translateX(100%);
 }
 .rotate-leave-to {
-  transform: rotateY(90deg);
+  transform: scale(0.6);
+  opacity: 0;
 }
 
 .animation-wrapper {
